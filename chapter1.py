@@ -103,22 +103,41 @@ import numpy as np
 # cv2.imshow("Result", image)
 # cv2.waitKey(0)
 
-############## Chapter 9: Face Detection using laptop camera
+############## Chapter 9: Face and Eye Detection using laptop camera
 vid = cv2.VideoCapture(0)
 vid.set(3, 640)
 vid.set(4, 480)
 vid.set(10, 100)
+minArea = 1000
 
 faceCacade = cv2.CascadeClassifier("D:/ComputerVision/haarcascade_frontalface_default.xml")
+faceCacade1 = cv2.CascadeClassifier("D:/ComputerVision/haarcascade_frontalcatface_extended.xml")
+eyeCascade = cv2.CascadeClassifier("D:/ComputerVision/haarcascade_eye.xml")
+eyeCascade1 = cv2.CascadeClassifier("D:/ComputerVision/haarcascade_eye_tree_eyeglasses.xml")
+
 
 while True:
     success, frame = vid.read()
 
     faces = faceCacade.detectMultiScale(frame,1.1,2)
+    faces1 = faceCacade1.detectMultiScale(frame,1.1,2)
+    eye = eyeCascade.detectMultiScale(frame,1.1,2)
+    eye1 = eyeCascade1.detectMultiScale(frame,1.1,4)
 
     for(x,y,w,h) in faces:
-        cv2.rectangle(frame,(x,y),(x+w,y+h),(255,0,0),2)         #BLUE, frntalface_default
+        area = w * h
+        if(area > minArea):
+            cv2.rectangle(frame,(x,y),(x+w,y+h),(255,0,0),2)        #BLUE, frontalface_default
+    for(x,y,w,h) in faces1:
+        area = w * h
+        if(area > minArea):
+            cv2.rectangle(frame,(x,y),(x+w,y+h),(255,0,0),2)        #BLUE, frontalface_extended
+    for(x,y,w,h) in eye1:
+        cv2.rectangle(frame,(x,y),(x+w,y+h),(0,255,0),2)            #GREEN, eye-glasses cascade
+    for (x, y, w, h) in eye:
+        cv2.rectangle(frame,(x,y),(x+w,y+h),(0,255,0),2)            #GREEN, eye cascade
 
     cv2.imshow("Video", frame)
-    if cv2.waitKey(1) & 0xFF == ord('Q'):
+    if cv2.waitKey(1) & 0xFF == ord('q'):
         break
+
