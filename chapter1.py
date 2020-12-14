@@ -77,17 +77,28 @@ import numpy as np
 # Chapter 9
 # Face Detection
 
-# img = cv2.imread("C:/Users/Shubham/Pictures/Desktop_Bg/Formals.jpg")
-img = cv2.imread("D:/ComputerVision/Lena.jpg")
-imgGray = cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)
-imgGrayResized = cv2.resize(imgGray, (500,600))
-image= cv2.add(imgGrayResized,np.array([-50.0])) #To Increse and decrese the brightness of the image
+img = cv2.imread("C:/Users/Shubham/Pictures/Desktop_Bg/Formals.jpg")
+# img = cv2.imread("D:/ComputerVision/Lena.jpg")
+# imgGray = cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)
+imgGrayResized = cv2.resize(img, (500,600))
+image= cv2.add(imgGrayResized,np.array([100.0])) #To Increse and decrese the brightness of the image
 
 faceCacade = cv2.CascadeClassifier("D:/ComputerVision/haarcascade_frontalface_default.xml")
+faceCacade1 = cv2.CascadeClassifier("D:/ComputerVision/haarcascade_frontalface_alt.xml")
+facecascade2 = cv2.CascadeClassifier("D:/ComputerVision/haarcascade_profileface.xml")
+
 faces = faceCacade.detectMultiScale(image,1.1,2)
+faces1 = faceCacade1.detectMultiScale(image,1.1,2)
+faces2 = facecascade2.detectMultiScale(image,1.1,2)
 
 for(x,y,w,h) in faces:
-    cv2.rectangle(image,(x,y),(x+w,y+h),(255,0,0),2)
+    cv2.rectangle(image,(x,y),(x+w,y+h),(255,0,0),2)        #BLUE, frntalface_default
+
+for(x,y,w,h) in faces1:
+    cv2.rectangle(image,(x,y),(x+w,y+h),(0,0,255),2)        #RED, frontalface_alt
+
+for(x,y,w,h) in faces2:
+    cv2.rectangle(image,(x,y),(x+w,y+h),(0,255,0),2)        #GREEN, profileface
 
 cv2.imshow("Result", image)
 cv2.waitKey(0)
