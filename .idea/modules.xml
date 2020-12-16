@@ -3,6 +3,8 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/ComputerVision.iml" filepath="$PROJECT_DIR$/.idea/ComputerVision.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../Socket Programming/.idea/Socket Programming.iml" filepath="$PROJECT_DIR$/../Socket Programming/.idea/Socket Programming.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../Tellonios/.idea/Tellonios.iml" filepath="$PROJECT_DIR$/../Tellonios/.idea/Tellonios.iml" />
     </modules>
   </component>
 </project>
