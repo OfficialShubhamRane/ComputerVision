@@ -77,7 +77,7 @@ class Tello:
             cv2.imshow('DJI Tello', self.last_frame)
 
             # Video Stream is closed if escape key is pressed
-            k = cv2.waitKey(1) & 0xFF
+            k = cv2.waitKey(1) & 0xFF           ###############################################
             if k == 27:
                 break
         cap.release()
